@@ -1,0 +1,36 @@
+
+# Flyway ignores
+*.user.toml
+*.artifact
+report.html
+report.json
+
+# Sensitive data / Secrets
+.env
+flyway.user.toml
+info.py
+
+# Python virtual environment
+.venv/
+venv/
+env/
+
+# Python generated files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Testing and Coverage
+.pytest_cache/
+htmlcov/
+.coverage
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# IDE specific files
+.idea/
+.vscode/
+.DS_Store
