@@ -5,6 +5,7 @@ from database import connect_to_db, close_db_connection
 
 from api.model import router as model_router
 from api.photographer import router as photographer_router
+from api.photosession import router as photosession_router
 
 
 @asynccontextmanager
@@ -26,3 +27,4 @@ app = FastAPI(lifespan=lifespan)
 
 app.include_router(model_router)
 app.include_router(photographer_router)
+app.include_router(photosession_router)
