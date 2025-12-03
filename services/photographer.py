@@ -1,6 +1,6 @@
 import asyncpg
 from fastapi import HTTPException, status
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 
 
 from crud.photographer import (
@@ -35,10 +35,10 @@ async def create_photographer_service(
 
 # --- READ ALL ---
 async def get_all_photographers_service(
-    db_pool: asyncpg.Pool,
+    db_pool: asyncpg.Pool, sort_by: Optional[str] = None
 ) -> List[PhotographerResponse]:
     try:
-        photographers = await get_all_photographers(db_pool)
+        photographers = await get_all_photographers(db_pool, sort_by=sort_by)
         return [PhotographerResponse(**ph) for ph in photographers]
     except Exception as e:
         raise HTTPException(

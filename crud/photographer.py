@@ -26,8 +26,14 @@ async def create_photographer(
 
 
 # --- READ ALL (GET /photographer/) ---
-async def get_all_photographers(db_pool: asyncpg.Pool) -> List[Dict[str, Any]]:
-    query = 'SELECT photographer_id, first_name, last_name, phone, email, camera, rating FROM "HR".PHOTOGRAPHER;'
+async def get_all_photographers(
+    db_pool: asyncpg.Pool, sort_by: Optional[str] = None
+) -> List[Dict[str, Any]]:
+    query = 'SELECT photographer_id, first_name, last_name, phone, email, camera, rating FROM "HR".PHOTOGRAPHER '
+    if sort_by == "rating_asc":
+        query += " ORDER BY rating ASC"
+    elif sort_by == "rating_desc":
+        query += " ORDER BY rating DESC"
     records = await db_pool.fetch(query)
     return [dict(record) for record in records]
 

@@ -1,7 +1,7 @@
-from fastapi import Depends, Path, status, APIRouter
+from fastapi import Depends, Path, status, APIRouter, Query
 import asyncpg
 from database import get_db_pool
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 
 from services.photographer import (
@@ -38,12 +38,14 @@ async def photographer_create(
 # --- GET ALL (Read All Photographers) ---
 @router.get("/", response_model=List[PhotographerResponse])
 async def photographer_read_all(
+    sort: Optional[str] = Query(
+        None, description="Sort. Use 'rating_asc' or 'rating_desc'."
+    ),
     db_pool: asyncpg.Pool = Depends(get_db_pool),
 ) -> List[PhotographerResponse]:
-    """
-    Gets a list of all photographers.
-    """
-    return await get_all_photographers_service(db_pool)
+
+    photographers = await get_all_photographers_service(db_pool, sort_by=sort)
+    return photographers
 
 
 # --- GET BY ID (Read One Photographer) ---
