@@ -7,6 +7,7 @@ from api.model import router as model_router
 from api.photographer import router as photographer_router
 from api.photosession import router as photosession_router
 from api.photo import router as photo_router
+from auth.router import router as auth_router
 
 
 @asynccontextmanager
@@ -30,3 +31,4 @@ app.include_router(model_router)
 app.include_router(photographer_router)
 app.include_router(photosession_router)
 app.include_router(photo_router)
+app.include_router(auth_router)
