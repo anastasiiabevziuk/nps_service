@@ -2,7 +2,8 @@ from fastapi import Depends, Path, status, APIRouter, Query
 import asyncpg
 from database import get_db_pool
 from typing import List, Dict, Optional
-
+from auth.router import get_current_user
+from auth.schemas import UserInDB
 
 from services.photographer import (
     create_photographer_service,
@@ -27,6 +28,7 @@ router = APIRouter(prefix="/photographer", tags=["Photographer"])
 )
 async def photographer_create(
     ph_data: PhotographerBase,
+    current_user: UserInDB = Depends(get_current_user),
     db_pool: asyncpg.Pool = Depends(get_db_pool),
 ) -> PhotographerResponse:
     """
