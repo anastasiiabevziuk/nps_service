@@ -47,6 +47,9 @@ async def photographer_read_all(
 ) -> List[PhotographerResponse]:
 
     photographers = await get_all_photographers_service(db_pool, sort_by=sort)
+    """
+    Gets all 'photographer' records, optionally sorted by rating.
+    """
     return photographers
 
 

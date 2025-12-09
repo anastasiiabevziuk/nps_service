@@ -36,7 +36,9 @@ async def model_details(
     model_id: int = Path(..., description="The ID of the model to retrieve"),
     db_pool: asyncpg.Pool = Depends(get_db_pool),
 ) -> Dict[str, Any]:
-
+    """
+    Gets a record from the 'model' table by ID via the service layer.
+    """
     return await get_model_by_id_service(db_pool, model_id)
 
 
@@ -46,7 +48,9 @@ async def model_delete(
     model_id: int = Path(..., description="The ID of the model to delete"),
     db_pool: asyncpg.Pool = Depends(get_db_pool),
 ) -> Dict[str, str]:
-
+    """
+    Deletes a record from the 'model' table by ID via the service layer.
+    """
     return await delete_model_service(db_pool, model_id)
 
 
@@ -57,7 +61,9 @@ async def model_update(
     model_id: int = Path(..., description="The ID of the model to update"),
     db_pool: asyncpg.Pool = Depends(get_db_pool),
 ) -> Dict[str, Any]:
-
+    """
+    Updates a record in the 'model' table by ID via the service layer.
+    """
     return await update_model_service(db_pool, model_id, model_data.model_dump())
 
 
@@ -67,5 +73,7 @@ async def model_create(
     model_data: ModelBase,
     db_pool: asyncpg.Pool = Depends(get_db_pool),
 ) -> Dict[str, Any]:
-
+    """
+    Creates a new record in the 'model' table via the service layer.
+    """
     return await create_model_service(db_pool, model_data.model_dump())

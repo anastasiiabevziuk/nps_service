@@ -67,7 +67,9 @@ async def photo_create(
         }
 
         created_photo = await create_photo_service(db_pool, new_data)
-
+        """
+        Creates a new record in the 'photo' table via the service layer.
+        """
         return created_photo
 
     except Exception as e:

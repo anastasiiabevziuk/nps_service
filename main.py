@@ -24,8 +24,17 @@ async def lifespan(app: FastAPI):
     await close_db_connection()
 
 
-app = FastAPI(lifespan=lifespan)
-
+app = FastAPI(
+    title="API NPS Service",
+    description="It is API for managing models, photographers, their sessions, and photos. Data is stored in PostgreSQL.",
+    version="1.0.0",
+    contact={
+        "name": "Anastasiia (Developer)",
+        "email": "anastasiiabevziuk@gmail.com",
+    },
+    # --- END КЛЮЧОВІ ПОЛЯ ---
+    lifespan=lifespan,
+)
 
 app.include_router(model_router)
 app.include_router(photographer_router)
