@@ -32,11 +32,11 @@ cd nps_service
 
 ### 2. Setup Virtual Environment and Install Dependencies
 
-````bash
+```bash
 python3 -m venv .venv
 source .venv/bin/activate
-# Install dependencies from requirements.txt
 pip install -r requirements.txt
+```
 
 ### Database Setup
 
@@ -50,7 +50,7 @@ Start the FastAPI server using Uvicorn:
 
 ```bash
 uvicorn main:app --reload
-````
+```
 
 The service will be accessible at http://127.0.0.1:8000 (or your configured port).
 
