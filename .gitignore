@@ -9,6 +9,7 @@ report.json
 .env
 flyway.user.toml
 info.py
+init-work.sql
 
 # Python virtual environment
 .venv/
