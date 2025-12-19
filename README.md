@@ -1,61 +1,73 @@
-# NPS Service (Photo Session Management API)
+# 📸 NPS Service (Photo Management System)
 
-## 🌟 Overview
+A backend service for managing photo sessions, models, and photographers. Built with **FastAPI** and **PostgreSQL**, and fully containerized using **Docker**.
 
-This is a backend service developed using **FastAPI** and **AsyncPG** for managing photo sessions and individual photo records. The API follows a hierarchical routing structure, allowing for CRUD (Create, Read, Update, Delete) operations on photos nested under their respective photo sessions.
+## 🚀 Quick Start
 
-### Key Technologies
+### 1. Prerequisites
 
-- **Framework:** FastAPI (Python)
-- **Database:** PostgreSQL (Asynchronous access via AsyncPG)
-- **Database Tooling:** Alembic (for migrations)
-- **Security:** JWT Token Authentication (Implemented via OAuth2)
+Make sure you have **Docker** and **Docker Compose** installed on your machine.
 
----
+### 2. Environment Setup
 
-## 🚀 Getting Started
+Create a `.env` file in the root directory. Use `.env.example` as a template.
 
-### Prerequisites
+### 3. Launch the Project
 
-You need the following installed on your system:
-
-- Python 3.10+
-- PostgreSQL Database
-- Git
-
-### 1. Clone the Repository
+Run the following command in your terminal:
 
 ```bash
-git clone https://github.com/anastasiiabevziuk/nps_service.git
-cd nps_service
+docker compose up --build
 ```
 
-### 2. Setup Virtual Environment and Install Dependencies
+Once started, the service will be available at:
+
+Swagger UI: [http://localhost:8000/docs](http://localhost:8000/docs)
+
+API Endpoint: [http://localhost:8000](http://localhost:8000)
+
+### 🛠 Tech Stack
+
+- Backend: FastAPI (Python 3.10+)
+
+- Database: PostgreSQL 17
+
+- Database Driver: asyncpg (Asynchronous)
+
+- Containerization: Docker & Docker Compose
+
+### 🗄 Database Structure
+
+On the first run, Docker automatically initializes the database using the init.sql file. The schema includes tables within the HR schema:
+
+- model — Model profiles and contact info.
+
+- photographer — Photographer details and equipment.
+
+- photosession — Records of specific photo shoots.
+- photo — File paths and image metadata (ISO, Lens, Camera).
+
+### 📸 Media Storage
+
+All uploaded photos are stored locally in the ./uploaded_photos directory. This folder is mounted as a Docker Volume, ensuring that your images persist even after the containers are restarted or removed.
+
+🛠 Useful Commands
+Stop services:
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+docker compose down
 ```
 
-### Database Setup
-
-Ensure your PostgreSQL database is running, the connection details are correct (e.g., in the `.env` file), and that **the necessary tables (`photosession`, `photo`, etc.) are already created** in your database schema.
-
----
-
-## 🏃 3. Running the Application
-
-Start the FastAPI server using Uvicorn:
+Reset database:
 
 ```bash
-uvicorn main:app --reload
+docker compose down -v
 ```
 
-The service will be accessible at http://127.0.0.1:8000 (or your configured port).
+(Warning: this deletes all stored data!)
 
-## 🏃 4. API Endpoints
+View logs:
 
-Documentation
-
-Interactive Documentation (Swagger UI): http://127.0.0.1:8000/docs
+```bash
+docker compose logs -f
+```
